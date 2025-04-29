@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dashboard SysQualy</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="bg-gray-100">
+
+  <!-- Menu Lateral -->
+  <aside class="fixed top-0 left-0 h-full w-56 bg-white shadow-md p-6 z-10">
+    <h2 class="text-xl font-bold text-blue-600 mb-6">SysQualy</h2>
+    <nav class="space-y-2">
+      <a href="#" class="block px-4 py-2 rounded hover:bg-blue-100 text-gray-700">Novo cliente</a>
+      <a href="#" class="block px-4 py-2 rounded hover:bg-blue-100 text-gray-700">Nova avaliação</a>
+      <a href="#" class="block px-4 py-2 rounded bg-blue-500 text-white">Dashboard</a>
+    </nav>
+  </aside>
+
+  <!-- Conteúdo principal -->
+  <main class="ml-56 p-6 min-h-screen">
+
+    <div class="container mx-auto">
+      <div class="bg-white shadow-md rounded-lg p-6">
+
+        <!-- Header -->
+        <div class="flex justify-between items-center mb-6">
+          <h1 class="text-2xl font-bold text-gray-800 flex items-center">
+            <svg class="mr-2" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path d="M3 3v18h18" />
+              <path d="M18 17V9" />
+              <path d="M13 17V5" />
+              <path d="M8 17V13" />
+            </svg>
+            Dashboard de Avaliações
+          </h1>
+
+          <div class="flex space-x-2">
+            <button onclick="exportReport('PDF')" class="bg-red-500 hover:bg-red-600 text-white px-3 py-2 rounded flex items-center">
+              <svg class="mr-2" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z" />
+                <polyline points="14 2 14 8 20 8" />
+                <line x1="16" x2="8" y1="13" y2="13" />
+                <line x1="16" x2="8" y1="17" y2="17" />
+                <line x1="10" x2="8" y1="9" y2="9" />
+              </svg>
+              PDF
+            </button>
+            <button onclick="exportReport('CSV')" class="bg-green-500 hover:bg-green-600 text-white px-3 py-2 rounded flex items-center">
+              <svg class="mr-2" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <rect width="18" height="18" x="3" y="3" rx="2" ry="2" />
+                <line x1="3" x2="21" y1="9" y2="9" />
+                <line x1="3" x2="21" y1="15" y2="15" />
+                <line x1="9" x2="9" y1="9" y2="21" />
+                <line x1="15" x2="15" y1="9" y2="21" />
+              </svg>
+              CSV
+            </button>
+          </div>
+        </div>
+
+        <!-- Filtros -->
+        <div class="flex flex-wrap gap-4 mb-6">
+          <div class="flex items-center gap-2">
+            <label for="periodo" class="text-gray-700">Período:</label>
+            <select id="periodo" class="border rounded px-2 py-1">
+              <option>Últimos 6 meses</option>
+              <option>Último ano</option>
+              <option>Personalizado</option>
+            </select>
+          </div>
+          <div class="flex items-center gap-2">
+            <label for="tipo" class="text-gray-700">Tipo de Avaliação:</label>
+            <select id="tipo" class="border rounded px-2 py-1">
+              <option>Todos</option>
+              <option>Usabilidade</option>
+              <option>Desempenho</option>
+              <option>Segurança</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Grid de gráficos + resumo -->
+        <div class="grid md:grid-cols-2 gap-6">
+
+          <!-- Gráfico -->
+          <div>
+            <h2 class="text-xl font-semibold mb-4 flex items-center">
+              <svg class="mr-2" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" />
+                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" />
+              </svg>
+              Média de Notas por Software
+            </h2>
+            <canvas id="graficoBarras" height="300"></canvas>
+          </div>
+
+          <!-- Resumo -->
+          <div class="bg-blue-50 p-4 rounded-lg">
+            <h2 class="text-xl font-semibold mb-4">Resumo de Avaliações</h2>
+            <ul class="space-y-2">
+              <li class="flex justify-between border-b pb-2">
+                <span>Total de Sistemas Avaliados</span>
+                <strong>3</strong>
+              </li>
+              <li class="flex justify-between border-b pb-2">
+                <span>Média Geral</span>
+                <strong>4.2</strong>
+              </li>
+              <li class="flex justify-between border-b pb-2">
+                <span>Sistema com Melhor Avaliação</span>
+                <strong>Portal de Vendas</strong>
+              </li>
+              <li class="flex justify-between">
+                <span>Avaliações no Período</span>
+                <strong>12</strong>
+              </li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Script do Gráfico -->
+  <script>
+    const ctx = document.getElementById('graficoBarras').getContext('2d');
+    const chart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: ['Sistema RH', 'ERP Financeiro', 'Portal de Vendas'],
+        datasets: [
+          {
+            label: 'Nota Média',
+            data: [4.2, 3.6, 4.7],
+            backgroundColor: '#3B82F6'
+          },
+          {
+            label: 'Criticidade',
+            data: [3.8, 4.5, 3.2],
+            backgroundColor: '#10B981'
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        scales: {
+          y: {
+            suggestedMin: 0,
+            suggestedMax: 5
+          }
+        }
+      }
+    });
+
+    function exportReport(tipo) {
+      alert(`Exportando relatório em ${tipo}`);
+    }
+  </script>
+</body>
+</html>

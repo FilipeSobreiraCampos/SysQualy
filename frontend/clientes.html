@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cadastrar Novo Cliente - SysQualy</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="clientes.js" defer></script>
+</head>
+<body class="bg-gray-100">
+
+  <!-- Menu Lateral -->
+  <aside class="fixed top-0 left-0 h-full w-56 bg-white shadow-md p-6 z-10">
+    <h2 class="text-xl font-bold text-blue-600 mb-6">SysQualy</h2>
+    <nav class="space-y-2">
+      <a href="#" class="block px-4 py-2 rounded hover:bg-blue-100 text-gray-700">Cadastrar novo cliente</a>
+      <a href="#" class="block px-4 py-2 rounded hover:bg-blue-100 text-gray-700">Nova avaliação</a>
+      <a href="#" class="block px-4 py-2 rounded bg-blue-500 text-white">Dashboard</a>
+    </nav>
+  </aside>
+
+  <!-- Conteúdo principal -->
+  <main class="ml-56 p-6 min-h-screen">
+
+    <div class="container mx-auto">
+      <div class="bg-white shadow-md rounded-lg p-6">
+
+        <!-- Header -->
+        <div class="flex justify-between items-center mb-6">
+          <h1 class="text-2xl font-bold text-gray-800">Cadastrar Novo Cliente</h1>
+          <button onclick="toggleForm()" class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded">
+            Novo Cliente
+          </button>
+        </div>
+
+        <!-- Barra de Pesquisa -->
+        <div class="mb-6">
+          <label for="search" class="text-gray-700">Pesquisar Cliente:</label>
+          <input id="search" type="text" class="mt-2 w-full border rounded px-4 py-2" placeholder="Digite o nome do cliente..." oninput="searchClients()">
+        </div>
+
+        <!-- Tabela de Clientes -->
+        <table class="min-w-full table-auto border-collapse border border-gray-200">
+          <thead class="bg-gray-50">
+            <tr>
+              <th class="px-4 py-2 text-left">Nome do Cliente</th>
+              <th class="px-4 py-2 text-left">Email</th>
+              <th class="px-4 py-2 text-left">Ação</th>
+            </tr>
+          </thead>
+          <tbody id="clientes-lista">
+            <!-- Exemplo de Clientes Cadastrados -->
+            <tr>
+              <td class="px-4 py-2">João Silva</td>
+              <td class="px-4 py-2">joao.silva@example.com</td>
+              <td class="px-4 py-2">
+                <button class="bg-red-500 hover:bg-red-600 text-white px-2 py-1 rounded" onclick="deleteClient('João Silva')">Excluir</button>
+              </td>
+            </tr>
+            <tr>
+              <td class="px-4 py-2">Maria Souza</td>
+              <td class="px-4 py-2">maria.souza@example.com</td>
+              <td class="px-4 py-2">
+                <button class="bg-red-500 hover:bg-red-600 text-white px-2 py-1 rounded" onclick="deleteClient('Maria Souza')">Excluir</button>
+              </td>
+            </tr>
+            <tr>
+              <td class="px-4 py-2">Carlos Pereira</td>
+              <td class="px-4 py-2">carlos.pereira@example.com</td>
+              <td class="px-4 py-2">
+                <button class="bg-red-500 hover:bg-red-600 text-white px-2 py-1 rounded" onclick="deleteClient('Carlos Pereira')">Excluir</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- Formulário de Cadastro de Cliente (inicialmente oculto) -->
+        <div id="form-container" class="mt-8 hidden">
+          <h2 class="text-xl font-semibold text-gray-800 mb-4">Novo Cliente</h2>
+          <form id="form-cadastro" class="space-y-4">
+            <div>
+              <label for="cliente-nome" class="block text-gray-700">Nome:</label>
+              <input type="text" id="cliente-nome" class="mt-2 w-full border rounded px-4 py-2" placeholder="Digite o nome do cliente">
+            </div>
+            <div>
+              <label for="cliente-email" class="block text-gray-700">Email:</label>
+              <input type="email" id="cliente-email" class="mt-2 w-full border rounded px-4 py-2" placeholder="Digite o email do cliente">
+            </div>
+            <div class="flex justify-end">
+              <button type="button" onclick="saveClient()" class="bg-blue-500 hover:bg-blue-600 text-white px-6 py-2 rounded">Salvar</button>
+            </div>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+</body>
+</html>
