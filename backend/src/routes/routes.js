@@ -1,6 +1,9 @@
 const express = require('express');
-const RatingController = require('../controllers/RatingController');
-const UserController = require('../controllers/UserController');
+const AvaliacaoController = require('../controllers/AvaliacaoController.js');
+const UserController = require('../controllers/UsuarioController.js');
+const SoftwareController = require('../controllers/SoftwareController.js');
+const TipoAvaliacaoController = require('../controllers/TipoAvaliacaoController.js');
+
 
 const routes = (app) => {
     app.use(express.json());
@@ -9,13 +12,21 @@ const routes = (app) => {
         res.send('Hello World!');
     });
 
-    // Routes for Ratings
-    app.get('/ratings', RatingController.listAllRatings); // List all ratings
-    app.post('/ratings', RatingController.createRating); // Create a new rating
+    // Routes for Avaliacao
+    app.get('/avaliacao', AvaliacaoController.listAllAvaliacao); // List all ratings
+    app.post('/avaliacao', AvaliacaoController.createAvaliacao); // Create a new rating
 
-    // Routes for Users
-    app.get('/users', UserController.listAllUsers); // List all users
-    app.post('/users', UserController.createUser); // Create a new user
+    // Routes for Usuario
+    app.get('/usuario', UserController.listAllUsuario); // List all users
+    app.post('/usuario', UserController.createUsuario); // Create a new user
+
+    //Routes for Software
+    app.get('/software', SoftwareController.listAllSoftware);
+    app.post('/software', SoftwareController.createSoftware);
+
+    //Routes for TipoAvaliacao
+    app.get('/tipo-avaliacao', TipoAvaliacaoController.listAllTipoAvaliacao);
+    app.post('/tipo-avaliacao', TipoAvaliacaoController.createTipoAvaliacao);
 };
 
 module.exports = routes;
