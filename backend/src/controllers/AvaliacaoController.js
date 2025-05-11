@@ -14,7 +14,7 @@ class AvaliacaoController {
   static async createAvaliacao(req, res) {
     try {
       const { descricao, valor, usuario_id, software_id, tipo_avaliacao_id } = req.body;
-      const avaliacao = await Avaliacao.createAvaliacao({
+      const avaliacao = await Avaliacao.create({
         descricao,
         valor,
         usuario_id,

@@ -34,11 +34,11 @@ const Avaliacao = sequelize.define('Avaliacao', {
 
 module.exports = Avaliacao;
 
-/*
-// src/models/Avaliacao.js (continuação
-//const Usuario = require('./Usuario');
-//const Software = require('./Software');
-//const TipoAvaliacao = require('./TipoAvaliacao');
+
+
+const Usuario = require('./Usuario');
+const Software = require('./Software');
+const TipoAvaliacao = require('./TipoAvaliacao');
 
 Avaliacao.belongsTo(Usuario, {
   foreignKey: 'usuario_id',
@@ -53,4 +53,4 @@ Avaliacao.belongsTo(Software, {
 Avaliacao.belongsTo(TipoAvaliacao, {
   foreignKey: 'tipo_avaliacao_id',
   onDelete: 'CASCADE',
-});*/
+});
