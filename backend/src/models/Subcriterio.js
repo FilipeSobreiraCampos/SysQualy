@@ -19,6 +19,11 @@ const Subcriterio = sequelize.define('Subcriterio', {
   criterio_id: {
     type: DataTypes.INTEGER,
     allowNull: false,
+    references: {
+      model: 'Criterio', // Nome da tabela referenciada
+      key: 'id',
+    },
+    onDelete: 'CASCADE',
   },
 }, {
   tableName: 'Subcriterio',

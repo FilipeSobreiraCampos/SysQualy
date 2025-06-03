@@ -1,6 +1,6 @@
 const express = require('express');
 const AvaliacaoController = require('../controllers/AvaliacaoController.js');
-const UserController = require('../controllers/UsuarioController.js');
+const UsuarioController = require('../controllers/UsuarioController.js');
 const SoftwareController = require('../controllers/SoftwareController.js');
 const QuestoesController = require('../controllers/QuestoesController.js');
 const SubcriterioController = require('../controllers/SubcriterioController');
@@ -16,20 +16,33 @@ const routes = (app) => {
     });
 
     // Routes for Avaliacao
-    app.get('/avaliacao', AvaliacaoController.listAllAvaliacao); // List all ratings
-    app.post('/avaliacao', AvaliacaoController.createAvaliacao); // Create a new rating
+    app.get('/avaliacao', AvaliacaoController.listAllAvaliacao);
+    app.get('/avaliacao/:id', AvaliacaoController.getAvaliacaoById);
+    app.post('/avaliacao', AvaliacaoController.createAvaliacao);
+    app.put('/avaliacao/:id', AvaliacaoController.updateAvaliacao);
+    app.delete('/avaliacao/:id', AvaliacaoController.deleteAvaliacao);
+    
 
-    // Routes for Usuario
-    app.get('/usuario', UserController.listAllUsuario); // List all users
-    app.post('/usuario', UserController.createUsuario); // Create a new user
+    // Routes for Usuario    
+    app.get('/usuario', UsuarioController.listAllUsuario);
+    app.post('/usuario', UsuarioController.createUsuario);
+    app.get('/usuario/:id', UsuarioController.getUsuarioById);
+    app.put('/usuario/:id', UsuarioController.updateUsuario);
+    app.delete('/usuario/:id', UsuarioController.deleteUsuario);
 
     //Routes for Software
     app.get('/software', SoftwareController.listAllSoftware);
+    app.get('/software/:id', SoftwareController.getSoftwareById);
     app.post('/software', SoftwareController.createSoftware);
+    app.put('/software/:id', SoftwareController.updateSoftware);
+    app.delete('/software/:id', SoftwareController.deleteSoftware);
 
     //Routes for TipoAvaliacao
-    app.get('/tipo-avaliacao', TipoAvaliacaoController.listAllTipoAvaliacao);
-    app.post('/tipo-avaliacao', TipoAvaliacaoController.createTipoAvaliacao);
+    app.get('/tipo-avaliacao', TipoAvaliacaoController.listAllTipoAvaliacao);             
+    app.get('/tipo-avaliacao/:id', TipoAvaliacaoController.getTipoAvaliacaoById);         
+    app.post('/tipo-avaliacao', TipoAvaliacaoController.createTipoAvaliacao);            
+    app.put('/tipo-avaliacao/:id', TipoAvaliacaoController.updateTipoAvaliacao);        
+    app.delete('/tipo-avaliacao/:id', TipoAvaliacaoController.deleteTipoAvaliacao);     
 
     // Rotas para Questões
     app.post('/questoes', QuestoesController.criarQuestao);
